@@ -32,6 +32,7 @@ const StyledDiv = styled.div`
     font-size: 0.7rem;
   }
   .tile {
+    background-color: lightgray;
     border-radius: 10;
     min-height: 100px;
     text-align: left;
@@ -77,18 +78,16 @@ const MyCalendar: React.FC<CalendarProps> = ({ events = [] }) => {
           )
           return (
             <>
-              <ol
+              <ul
                 style={{
                   marginTop: 5,
                   marginBottom: 5,
-                  listStyle: 'square',
-                  paddingLeft: 5,
                 }}
               >
                 {matchingEvents.map((event) => (
                   <li key={event.id}>{event.title}</li>
                 ))}
-              </ol>
+              </ul>
             </>
           )
         }}

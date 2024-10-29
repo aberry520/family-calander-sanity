@@ -1,6 +1,7 @@
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { useLiveQuery } from 'next-sanity/preview'
 import Link from 'next/link'
+import styled from 'styled-components'
 
 import Card from '~/components/Card'
 import Container from '~/components/Container'
@@ -28,6 +29,11 @@ export const getStaticProps: GetStaticProps<
   }
 }
 
+const StyledDiv = styled.div`
+  background-color: darkgray;
+  height: 100vh;
+`
+
 export default function IndexPage(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
@@ -38,7 +44,6 @@ export default function IndexPage(
     date: new Date(`${post.date}T00:00:00`),
   }))
   return (
-    // <Container>
     // <section>
     //   {/* {posts.length ? (
     //       posts.map((post) => <Card key={post._id} post={post} />)
@@ -46,10 +51,9 @@ export default function IndexPage(
     //       <Welcome />
     //     )} */}
     // </section>
-    <>
+    <StyledDiv>
       <MyCalendar events={events} />
       <Link href="/studio/structure/post">Add Events</Link>
-    </>
-    // </Container>
+    </StyledDiv>
   )
 }
