@@ -1,5 +1,6 @@
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { useLiveQuery } from 'next-sanity/preview'
+import Link from 'next/link'
 
 import Card from '~/components/Card'
 import Container from '~/components/Container'
@@ -31,21 +32,24 @@ export default function IndexPage(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
   const [posts] = useLiveQuery<Post[]>(props.posts, postsQuery)
-  const initialEvents = [
-    { id: 1, title: 'Meeting', date: new Date('2024-10-15') },
-    { id: 2, title: 'Lunch', date: new Date('2024-10-16') },
-  ]
-  console.log('posts', posts)
+  const events = posts.map((post) => ({
+    id: post._id,
+    title: post.title,
+    date: new Date(`${post.date}T00:00:00`),
+  }))
   return (
-    <Container>
-      <section>
-        {/* {posts.length ? (
-          posts.map((post) => <Card key={post._id} post={post} />)
-        ) : (
-          <Welcome />
-        )} */}
-        <MyCalendar events={initialEvents} />
-      </section>
-    </Container>
+    // <Container>
+    // <section>
+    //   {/* {posts.length ? (
+    //       posts.map((post) => <Card key={post._id} post={post} />)
+    //     ) : (
+    //       <Welcome />
+    //     )} */}
+    // </section>
+    <>
+      <MyCalendar events={events} />
+      <Link href="/studio/structure/post">Add Events</Link>
+    </>
+    // </Container>
   )
 }

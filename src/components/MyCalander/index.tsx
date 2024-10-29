@@ -4,7 +4,7 @@ import styled from 'styled-components'
 // import './styles.css'
 
 interface Event {
-  id: number
+  id: string
   title: string
   date: Date
 }
@@ -15,6 +15,7 @@ interface CalendarProps {
 
 const StyledCalendar = styled(Calendar)`
   width: 100%;
+  height: 100%;
 `
 
 const StyledDiv = styled.div`
@@ -23,6 +24,16 @@ const StyledDiv = styled.div`
 
   .event-marked {
     background-color: lightblue;
+    min-height: 100px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.7rem;
+  }
+  .tile {
+    min-height: 100px;
+    display: flex;
+    font-size: 0.7rem;
   }
 
   input[type='text'],
@@ -48,18 +59,41 @@ const MyCalendar: React.FC<CalendarProps> = ({ events = [] }) => {
   const onChange = (newDate: Date) => {
     setDate(newDate)
   }
-
+  console.log(events.map((event) => event.date))
   return (
     <StyledDiv>
       <StyledCalendar
         onChange={(value) => onChange(value as Date)}
         value={date}
+        showNeighboringMonth={false}
+        calendarType="gregory"
+        tileContent={({ date, view }) => {
+          const matchingEvents = events.filter(
+            (event) => event.date.toDateString() === date.toDateString(),
+          )
+          return (
+            <>
+              <ol
+                style={{
+                  marginTop: 5,
+                  marginBottom: 5,
+                  listStyle: 'square',
+                  paddingLeft: 5,
+                }}
+              >
+                {matchingEvents.map((event) => (
+                  <li key={event.id}>{event.title}</li>
+                ))}
+              </ol>
+            </>
+          )
+        }}
         tileClassName={({ date }) =>
           events.some(
             (event) => event.date.toDateString() === date.toDateString(),
           )
             ? 'event-marked'
-            : ''
+            : 'tile'
         }
       />
       {events.filter(
