@@ -24,6 +24,7 @@ const StyledDiv = styled.div`
 
   .event-marked {
     background-color: lightblue;
+    border-radius: 10;
     min-height: 100px;
     text-align: left;
     display: flex;
@@ -31,8 +32,11 @@ const StyledDiv = styled.div`
     font-size: 0.7rem;
   }
   .tile {
+    border-radius: 10;
     min-height: 100px;
+    text-align: left;
     display: flex;
+    flex-direction: column;
     font-size: 0.7rem;
   }
 
