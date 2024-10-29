@@ -54,7 +54,7 @@ export default function ProjectSlugRoute(
   return (
     <Container>
       <section className="post">
-        {post.mainImage ? (
+        {/* {post.mainImage ? (
           <Image
             className="post__cover"
             src={urlForImage(post.mainImage).url()}
@@ -64,13 +64,13 @@ export default function ProjectSlugRoute(
           />
         ) : (
           <div className="post__cover--none" />
-        )}
+        )} */}
         <div className="post__container">
           <h1 className="post__title">{post.title}</h1>
-          <p className="post__excerpt">{post.excerpt}</p>
+          {/* <p className="post__excerpt">{post.excerpt}</p> */}
           <p className="post__date">{formatDate(post._createdAt)}</p>
           <div className="post__content">
-            <PortableText value={post.body} />
+            {/* <PortableText value={post.body} /> */}
           </div>
         </div>
       </section>
