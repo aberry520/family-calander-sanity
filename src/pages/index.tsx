@@ -3,6 +3,7 @@ import { useLiveQuery } from 'next-sanity/preview'
 
 import Card from '~/components/Card'
 import Container from '~/components/Container'
+import MyCalendar from '~/components/MyCalander/index'
 import Welcome from '~/components/Welcome'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
@@ -30,14 +31,20 @@ export default function IndexPage(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
   const [posts] = useLiveQuery<Post[]>(props.posts, postsQuery)
+  const initialEvents = [
+    { id: 1, title: 'Meeting', date: new Date('2024-10-15') },
+    { id: 2, title: 'Lunch', date: new Date('2024-10-16') },
+  ]
+  console.log('posts', posts)
   return (
     <Container>
       <section>
-        {posts.length ? (
+        {/* {posts.length ? (
           posts.map((post) => <Card key={post._id} post={post} />)
         ) : (
           <Welcome />
-        )}
+        )} */}
+        <MyCalendar events={initialEvents} />
       </section>
     </Container>
   )
